@@ -18,3 +18,4 @@
 18. SELECT company, COUNT(company) FROM Employees GROUP BY company ORDER BY id;
 19. SELECT company, MAX(salary) FROM Employees GROUP BY company ORDER BY id;
 20. SELECT company, MAX(salary) FROM Employees WHERE salary >= 5000 GROUP BY company;
+21. 
