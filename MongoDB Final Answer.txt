@@ -1,1 +1,0 @@
-db.movies.find({$and: [{$and: [{$or: [{cast: "Jack Nicholson"}, {cast: "John Huston"}]},{viewerRating: {$gt: 7}}]},{mpaaRating: "R"}]}).count()
