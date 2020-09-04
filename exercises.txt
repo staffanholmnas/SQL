@@ -18,4 +18,14 @@
 18. SELECT company, COUNT(company) FROM Employees GROUP BY company ORDER BY id;
 19. SELECT company, MAX(salary) FROM Employees GROUP BY company ORDER BY id;
 20. SELECT company, MAX(salary) FROM Employees WHERE salary >= 5000 GROUP BY company;
-21. 
+21. SELECT Players.name, Results.score FROM Players, Results WHERE Players.id = Results.player_id;
+22. SELECT Players.name, Results.score FROM Players, Results WHERE Players.id = Results.player_id AND Players.name = "Uolevi";
+23. SELECT Players.name, Results.score FROM Players, Results WHERE Players.id = Results.player_id AND Results.score > 250;
+24. SELECT Players.name, Results.score FROM Players, Results WHERE Players.id = Results.player_id ORDER BY Results.score DESC, Players.name;
+25. SELECT P.name, MAX(R.score) FROM Players P, Results R WHERE P.id = R.player_id GROUP BY P.name;
+26. SELECT P.name, COUNT(DISTINCT R.score) FROM Players P, Results R WHERE P.id = R.player_id GROUP BY P.name;
+27. SELECT S.name, C.name, G.grade FROM Students S, Courses C, Gradings G WHERE S.id = G.student_id AND C.id = G.course_id;
+28. SELECT C.name, G.grade FROM Students S, Courses C, Gradings G WHERE S.id = G.student_id AND C.id = G.course_id AND S.name ="Uolevi";
+29. SELECT S.name, G.grade FROM Students S, Courses C, Gradings G WHERE S.id = G.student_id AND C.id = G.course_id AND C.name ="Basic Coding";
+30. SELECT S.name, C.name, G.grade FROM Students S, Courses C, Gradings G WHERE S.id = G.student_id AND C.id = G.course_id AND G.grade >= 4;
+31.
