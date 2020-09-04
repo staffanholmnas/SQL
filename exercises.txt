@@ -28,4 +28,12 @@
 28. SELECT C.name, G.grade FROM Students S, Courses C, Gradings G WHERE S.id = G.student_id AND C.id = G.course_id AND S.name ="Uolevi";
 29. SELECT S.name, G.grade FROM Students S, Courses C, Gradings G WHERE S.id = G.student_id AND C.id = G.course_id AND C.name ="Basic Coding";
 30. SELECT S.name, C.name, G.grade FROM Students S, Courses C, Gradings G WHERE S.id = G.student_id AND C.id = G.course_id AND G.grade >= 4;
-31.
+31. SELECT S.name, COUNT(G.grade) FROM Students S, Courses C, Gradings G WHERE S.id = G.student_id AND C.id = G.course_id GROUP BY S.name ORDER BY S.id;
+32. SELECT S.name, MAX(G.grade) FROM Students S, Courses C, Gradings G WHERE S.id = G.student_id AND C.id = G.course_id GROUP BY S.name ORDER BY S.id;
+33. SELECT A.name, B.name FROM Cities A, Cities B, Flights F WHERE A.id = F.departure_id AND B.id = F.destination_id;
+34. SELECT C.name FROM Cities C, Flights F WHERE C.id = F.destination_id AND F.departure_id = 1;
+35. SELECT P.name, COUNT(R.score) FROM Players p LEFT JOIN Results R ON P.id = R.player_id GROUP BY P.name ORDER BY P.id;
+36. SELECT S.name, COUNT(G.grade) FROM Students S LEFT JOIN Gradings G ON S.id = G.student_id GROUP BY S.name ORDER BY S.id;
+37. SELECT C.name, COUNT(G.student_id) FROM Courses C LEFT JOIN Gradings G ON C.id = G.course_id GROUP BY C.name ORDER BY C.id;
+38. SELECT C.name FROM Courses C , Gradings G WHERE C.id = G.course_id GROUP BY C.name ORDER BY C.id;
+39. 
