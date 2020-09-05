@@ -36,4 +36,6 @@
 36. SELECT S.name, COUNT(G.grade) FROM Students S LEFT JOIN Gradings G ON S.id = G.student_id GROUP BY S.name ORDER BY S.id;
 37. SELECT C.name, COUNT(G.student_id) FROM Courses C LEFT JOIN Gradings G ON C.id = G.course_id GROUP BY C.name ORDER BY C.id;
 38. SELECT C.name FROM Courses C , Gradings G WHERE C.id = G.course_id GROUP BY C.name ORDER BY C.id;
-39. 
+39. SELECT C.name FROM Courses C LEFT JOIN Gradings G ON C.id = G.course_id WHERE G.course_id IS NULL;
+40. SELECT C.name, COUNT(F.departure_id) FROM Cities C LEFT JOIN Flights F ON C.id =F.departure_id GROUP BY C.name ORDER BY C.id;
+41. 
