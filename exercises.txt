@@ -58,4 +58,7 @@
 58. SELECT word FROM Words WHERE word LIKE "a%";
 59. SELECT word FROM Words WHERE word LIKE "_p%" AND LENGTH(word) = 5;
 60. SELECT word FROM Words WHERE word LIKE "%a%a%" AND word NOT LIKE "%a%a%a%";
-61. 
+61. SELECT U.username, COUNT(M.user_id) FROM Users U, Groups G LEFT JOIN Memberships M ON U.id =M.user_id AND G.id = M.group_id GROUP BY U.username ORDER BY U.id;
+62. SELECT G.name, COUNT(M.group_id) FROM Users U, Groups G LEFT JOIN Memberships M ON U.id =M.user_id AND G.id = M.group_id GROUP BY G.name ORDER BY G.id;
+63. 
+64.
