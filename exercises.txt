@@ -50,7 +50,7 @@
 50. SELECT name FROM Movies WHERE (year % 4 = 0 AND year % 100 <> 0) OR (year % 100 = 0 AND year % 400 = 0);
 51. SELECT name FROM Products WHERE price = (SELECT MIN(price) FROM Products);
 52. SELECT name FROM Products WHERE price <= (SELECT MIN(price)*2 FROM Products);
-53. 
+53. SELECT name FROM Products GROUP BY price HAVING COUNT(*) = 1;
 54. SELECT word FROM Words ORDER BY word LIMIT 1;
 55. SELECT word FROM Words ORDER BY word LIMIT 1 OFFSET 1;
 56. SELECT word FROM Words ORDER BY word LIMIT 99999999999999999 OFFSET 1;
@@ -60,5 +60,9 @@
 60. SELECT word FROM Words WHERE word LIKE "%a%a%" AND word NOT LIKE "%a%a%a%";
 61. SELECT U.username, COUNT(M.user_id) FROM Users U, Groups G LEFT JOIN Memberships M ON U.id =M.user_id AND G.id = M.group_id GROUP BY U.username ORDER BY U.id;
 62. SELECT G.name, COUNT(M.group_id) FROM Users U, Groups G LEFT JOIN Memberships M ON U.id =M.user_id AND G.id = M.group_id GROUP BY G.name ORDER BY G.id;
-63. 
+63. SELECT U.username FROM Users U LEFT JOIN Memberships M ON U.id = M.user_id LEFT JOIN Groups G ON G.id = M.group_id GROUP BY U.username HAVING COUNT(*) > 1 ORDER BY U.id;
 64.
+65.
+66. SELECT word FROM Words ORDER BY LOWER(word), word;
+67. SELECT name, MIN(price) FROM Products GROUP BY name ORDER BY price LIMIT 1;
+68. 
