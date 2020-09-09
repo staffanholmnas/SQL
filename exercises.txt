@@ -53,7 +53,7 @@
 53. SELECT name FROM Products GROUP BY price HAVING COUNT(*) = 1;
 54. SELECT word FROM Words ORDER BY word LIMIT 1;
 55. SELECT word FROM Words ORDER BY word LIMIT 1 OFFSET 1;
-56. SELECT word FROM Words ORDER BY word LIMIT 99999999999999999 OFFSET 1;
+56. SELECT word FROM Words ORDER BY word LIMIT -1 OFFSET 1;
 57. SELECT word FROM Words WHERE word LIKE "%i%";
 58. SELECT word FROM Words WHERE word LIKE "a%";
 59. SELECT word FROM Words WHERE word LIKE "_p%" AND LENGTH(word) = 5;
@@ -65,10 +65,10 @@
 65.
 66. SELECT word FROM Words ORDER BY LOWER(word), word;
 67. SELECT name, MIN(price) FROM Products GROUP BY name ORDER BY price LIMIT 1;
-68. 
+68. SELECT A.name, COUNT(A.price) FROM Products A, Products B WHERE ABS(A.price - B.price) < 2 GROUP BY A.id;  
 69. 
-70. 
-71. 
+70. SELECT MIN(ABS(A.price - B.price)) FROM Products A, Products B WHERE ABS(A.price - B.price) <> 0;
+71. SELECT A.owner, COALESCE(SUM(T.change), 0) FROM Accounts A LEFT JOIN Transactions T ON A.id = T.account_id GROUP BY A.id;
 72. 
 73. 
 74. 
