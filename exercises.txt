@@ -31,7 +31,7 @@
 31. SELECT S.name, COUNT(G.grade) FROM Students S, Courses C, Gradings G WHERE S.id = G.student_id AND C.id = G.course_id GROUP BY S.name ORDER BY S.id;
 32. SELECT S.name, MAX(G.grade) FROM Students S, Courses C, Gradings G WHERE S.id = G.student_id AND C.id = G.course_id GROUP BY S.name ORDER BY S.id;
 33. SELECT A.name, B.name FROM Cities A, Cities B, Flights F WHERE A.id = F.departure_id AND B.id = F.destination_id;
-34. SELECT C.name FROM Cities C, Flights F WHERE C.id = F.destination_id AND F.departure_id = 1;
+34. SELECT D.name FROM Cities C LEFT JOIN Flights F ON C.id = F.departure_id LEFT JOIN Cities D ON D.id = F.destination_id WHERE C.name = "Helsinki";
 35. SELECT P.name, COUNT(R.score) FROM Players p LEFT JOIN Results R ON P.id = R.player_id GROUP BY P.name ORDER BY P.id;
 36. SELECT S.name, COUNT(G.grade) FROM Students S LEFT JOIN Gradings G ON S.id = G.student_id GROUP BY S.name ORDER BY S.id;
 37. SELECT C.name, COUNT(G.student_id) FROM Courses C LEFT JOIN Gradings G ON C.id = G.course_id GROUP BY C.name ORDER BY C.id;
