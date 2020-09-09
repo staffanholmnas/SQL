@@ -69,7 +69,7 @@
 69. 
 70. SELECT MIN(ABS(A.price - B.price)) FROM Products A, Products B WHERE ABS(A.price - B.price) <> 0;
 71. SELECT A.owner, COALESCE(SUM(T.change), 0) FROM Accounts A LEFT JOIN Transactions T ON A.id = T.account_id GROUP BY A.id;
-72. 
+72. SELECT SUM(T.change) OVER(ORDER BY T.id) FROM Accounts A , Transactions T WHERE A.id = T.account_id AND A.owner = "Uolevi" ORDER BY T.id;
 73. 
 74. 
 75. 
@@ -78,9 +78,23 @@
 78. 
 79. SELECT C.name, COUNT( P.cart_id) FROM Carts C LEFT JOIN Passengers P ON C.id = P.cart_id GROUP BY C.id ORDER BY C.id; 
 80. SELECT C.name, (C.seats - COUNT(P.cart_id)) FROM Carts C LEFT JOIN Passengers P ON C.id = P.cart_id GROUP BY C.id ORDER BY C.id; 
-81. 
+81. SELECT (SELECT SUM(C.seats) FROM Carts C) - COUNT(P.id) FROM Passengers P;
 82. 
 83. 
 84. SELECT C.name FROM Carts C LEFT JOIN Passengers P ON C.id = P.cart_id WHERE P.cart_id IS NULL;
 85. 
 86. 
+87. 
+88. 
+89. 
+90. 
+91. 
+92. 
+93. 
+94. 
+95. 
+96. 
+97. 
+98. 
+99. 
+100.     
