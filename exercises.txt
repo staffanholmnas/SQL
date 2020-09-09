@@ -66,3 +66,21 @@
 66. SELECT word FROM Words ORDER BY LOWER(word), word;
 67. SELECT name, MIN(price) FROM Products GROUP BY name ORDER BY price LIMIT 1;
 68. 
+69. 
+70. 
+71. 
+72. 
+73. 
+74. 
+75. 
+76. 
+77. 
+78. 
+79. SELECT C.name, COUNT( P.cart_id) FROM Carts C LEFT JOIN Passengers P ON C.id = P.cart_id GROUP BY C.id ORDER BY C.id; 
+80. SELECT C.name, (C.seats - COUNT(P.cart_id)) FROM Carts C LEFT JOIN Passengers P ON C.id = P.cart_id GROUP BY C.id ORDER BY C.id; 
+81. 
+82. 
+83. 
+84. SELECT C.name FROM Carts C LEFT JOIN Passengers P ON C.id = P.cart_id WHERE P.cart_id IS NULL;
+85. 
+86. 
