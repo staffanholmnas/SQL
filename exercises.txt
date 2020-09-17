@@ -67,13 +67,13 @@
 67. SELECT name, MIN(price) FROM Products GROUP BY name ORDER BY price LIMIT 1;
 68. SELECT A.name, COUNT(A.price) FROM Products A, Products B WHERE ABS(A.price - B.price) < 2 GROUP BY A.id;  
 69. 
-70. SELECT MIN(ABS(A.price - B.price)) FROM Products A, Products B WHERE ABS(A.price - B.price) <> 0;
+70. SELECT MIN(ABS(A.price - B.price)) FROM Products A, Products B WHERE A.id <> B.id;
 71. SELECT A.owner, COALESCE(SUM(T.change), 0) FROM Accounts A LEFT JOIN Transactions T ON A.id = T.account_id GROUP BY A.id;
 72. SELECT SUM(T.change) OVER(ORDER BY T.id) FROM Accounts A , Transactions T WHERE A.id = T.account_id AND A.owner = "Uolevi" ORDER BY T.id;
 73. 
-74. 
+74. SELECT S.name, COUNT(DISTINCT T.exercise_id) FROM Students S , Exercises E LEFT JOIN Transmissions T ON E.id = T.exercise_id AND S.id = T.student_id AND T.state = 1 GROUP BY S.id;
 75. 
-76. 
+76. SELECT score FROM Results GROUP BY score ORDER BY COUNT(*) DESC, score LIMIT 1;
 77. 
 78. 
 79. SELECT C.name, COUNT( P.cart_id) FROM Carts C LEFT JOIN Passengers P ON C.id = P.cart_id GROUP BY C.id ORDER BY C.id; 
@@ -83,7 +83,7 @@
 83. 
 84. SELECT C.name FROM Carts C LEFT JOIN Passengers P ON C.id = P.cart_id WHERE P.cart_id IS NULL;
 85. 
-86. 
+86. SELECT P.name, COUNT(C.packet_id), COUNT(DISTINCT C.product_id) FROM Products D, Packets P LEFT JOIN Contents C ON P.id = C.packet_id AND C.packet_id = D.id GROUP BY P.Id;
 87. 
 88. 
 89. 
