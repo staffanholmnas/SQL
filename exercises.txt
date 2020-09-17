@@ -80,7 +80,7 @@
 80. SELECT C.name, (C.seats - COUNT(P.cart_id)) FROM Carts C LEFT JOIN Passengers P ON C.id = P.cart_id GROUP BY C.id ORDER BY C.id; 
 81. SELECT (SELECT SUM(C.seats) FROM Carts C) - COUNT(P.id) FROM Passengers P;
 82. 
-83. 
+83. SELECT P.name FROM Carts C, Passengers P WHERE C.id = P.cart_id GROUP BY P.cart_id HAVING COUNT(P.cart_id) = 1;
 84. SELECT C.name FROM Carts C LEFT JOIN Passengers P ON C.id = P.cart_id WHERE P.cart_id IS NULL;
 85. 
 86. SELECT P.name, COUNT(C.packet_id), COUNT(DISTINCT C.product_id) FROM Products D, Packets P LEFT JOIN Contents C ON P.id = C.packet_id AND C.packet_id = D.id GROUP BY P.Id;

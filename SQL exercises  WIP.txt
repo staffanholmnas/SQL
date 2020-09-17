@@ -3,7 +3,7 @@
 64. SELECT U.username FROM Users U, Groups G LEFT JOIN Memberships M ON U.id = M.user_id AND G.id = M.group_id WHERE M.group_id = G.id AND G.id = U.id AND U.id = (U.username = "uolevi");
 69. SELECT * FROM Products A , Products B WHERE (A.price + B.price) = 10;
 73. SELECT A.owner, SUM(T.change) FROM Accounts A LEFT JOIN Transactions T ON A.id = T.account_id WHERE T.change > 0 GROUP BY A.owner ORDER BY A.id;
-75. SELECT S.name, COUNT(DISTINCT T.exercise_id) FROM Students S LEFT JOIN Transmissions T ON S.id = T.student_id LEFT JOIN Exercises E ON E.id = T.exercise_id GROUP BY S.id;
+75. SELECT S.name, COUNT(T.exercise_id) FROM Students S , Exercises E LEFT JOIN Transmissions T ON E.id = T.exercise_id AND S.id = T.student_id AND T.student_id = T.exercise_id  GROUP BY S.id;
 87. SELECT D.name, D.price, SUM(P.price), SUM(P.price) - D.price FROM Products P  JOIN Contents C ON P.id = C.product_id LEFT JOIN Packets D ON D.id = C.packet_id GROUP BY D.id;
 88. SELECT P.name, COUNT(C.product_id) FROM Products P LEFT JOIN Contents C ON P.id = C.product_id LEFT JOIN Packets D ON D.id = C.packet_id GROUP BY P.id;
 89. SELECT P.name, COUNT(C.product_id) FROM Products P LEFT JOIN Contents C ON P.id = C.product_id LEFT JOIN Packets D ON D.id = C.packet_id GROUP BY P.id;
