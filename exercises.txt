@@ -74,8 +74,8 @@
 74. SELECT S.name, COUNT(DISTINCT T.exercise_id) FROM Students S , Exercises E LEFT JOIN Transmissions T ON E.id = T.exercise_id AND S.id = T.student_id AND T.state = 1 GROUP BY S.id;
 75. 
 76. SELECT score FROM Results GROUP BY score ORDER BY COUNT(*) DESC, score LIMIT 1;
-77. 
-78. 
+77. SELECT score FROM Results ORDER BY score LIMIT 1 OFFSET (SELECT COUNT(id) FROM Results)/2
+78. SELECT score FROM Results ORDER BY score LIMIT 1 OFFSET (SELECT COUNT(id) - 1 FROM Results)/2
 79. SELECT C.name, COUNT( P.cart_id) FROM Carts C LEFT JOIN Passengers P ON C.id = P.cart_id GROUP BY C.id ORDER BY C.id; 
 80. SELECT C.name, (C.seats - COUNT(P.cart_id)) FROM Carts C LEFT JOIN Passengers P ON C.id = P.cart_id GROUP BY C.id ORDER BY C.id; 
 81. SELECT (SELECT SUM(C.seats) FROM Carts C) - COUNT(P.id) FROM Passengers P;
