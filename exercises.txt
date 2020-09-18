@@ -66,7 +66,7 @@
 66. SELECT word FROM Words ORDER BY LOWER(word), word;
 67. SELECT name, MIN(price) FROM Products GROUP BY name ORDER BY price LIMIT 1;
 68. SELECT A.name, COUNT(A.price) FROM Products A, Products B WHERE ABS(A.price - B.price) < 2 GROUP BY A.id;  
-69. 
+69. SELECT COUNT(*) FROM Products A , Products B WHERE (A.price + B.price) = 10 AND A.id <= B.id;
 70. SELECT MIN(ABS(A.price - B.price)) FROM Products A, Products B WHERE A.id <> B.id;
 71. SELECT A.owner, COALESCE(SUM(T.change), 0) FROM Accounts A LEFT JOIN Transactions T ON A.id = T.account_id GROUP BY A.id;
 72. SELECT SUM(T.change) OVER(ORDER BY T.id) FROM Accounts A , Transactions T WHERE A.id = T.account_id AND A.owner = "Uolevi" ORDER BY T.id;
@@ -84,17 +84,17 @@
 84. SELECT C.name FROM Carts C LEFT JOIN Passengers P ON C.id = P.cart_id WHERE P.cart_id IS NULL;
 85. 
 86. SELECT P.name, COUNT(C.packet_id), COUNT(DISTINCT C.product_id) FROM Products D, Packets P LEFT JOIN Contents C ON P.id = C.packet_id AND C.packet_id = D.id GROUP BY P.Id;
-87. 
-88. 
+87. SELECT P.name, P.price, COALESCE(SUM(D.price),0), COALESCE(SUM(D.price),0) - P.price FROM Packets P LEFT JOIN Contents C ON P.id = C.packet_id LEFT JOIN Products D ON D.id = C.product_id GROUP BY P.id;
+88. SELECT D.name, COUNT(DISTINCT C.packet_id) FROM Products D LEFT JOIN Contents C ON D.id = C.product_id LEFT JOIN Packets P ON D.id = C.packet_id GROUP BY D.id;
 89. 
-90. 
-91. 
+90. SELECT row_number() OVER (ORDER BY P.name) n, P.name, MAX(R.score) FROM Players P , Results R WHERE P.id = R.player_id GROUP BY P.id ORDER BY P.name;
+91. SELECT RANK() OVER(ORDER BY score DESC), P.name, MAX(R.score) FROM Players P , Results R WHERE P.id = R.player_id GROUP BY P.id ORDER BY R.score DESC, P.name;
 92. 
 93. 
 94. 
 95. 
 96. 
 97. 
-98. 
+98. SELECT id , (SELECT COUNT(*) FROM Reservations A WHERE A.start <= B.end AND A.end >= B.start) -1 FROM Reservations B;
 99. 
 100.     

@@ -1,14 +1,12 @@
 34. Hard-coded: SELECT C.name FROM Cities C, Flights F WHERE C.id = F.destination_id AND F.departure_id = 1;
 53. Alternative: SELECT name FROM Products WHERE price IN (SELECT price FROM Products GROUP BY price HAVING COUNT(*) = 1);
 64. SELECT U.username FROM Users U, Groups G LEFT JOIN Memberships M ON U.id = M.user_id AND G.id = M.group_id WHERE M.group_id = G.id AND G.id = U.id AND U.id = (U.username = "uolevi");
-69. SELECT * FROM Products A , Products B WHERE (A.price + B.price) = 10;
 73. SELECT A.owner, SUM(T.change) FROM Accounts A LEFT JOIN Transactions T ON A.id = T.account_id WHERE T.change > 0 GROUP BY A.owner ORDER BY A.id;
 75. SELECT S.name, COUNT(T.exercise_id) FROM Students S , Exercises E LEFT JOIN Transmissions T ON E.id = T.exercise_id AND S.id = T.student_id AND T.student_id = T.exercise_id  GROUP BY S.id;
-87. SELECT D.name, D.price, SUM(P.price), SUM(P.price) - D.price FROM Products P  JOIN Contents C ON P.id = C.product_id LEFT JOIN Packets D ON D.id = C.packet_id GROUP BY D.id;
+87. SELECT P.name, P.price, SUM(D.price), SUM(P.price) - D.price FROM Products D, Packets P LEFT JOIN Contents C ON P.id = C.packet_id AND D.id = C.product_id GROUP BY P.id;
 88. SELECT P.name, COUNT(C.product_id) FROM Products P LEFT JOIN Contents C ON P.id = C.product_id LEFT JOIN Packets D ON D.id = C.packet_id GROUP BY P.id;
-89. SELECT P.name, COUNT(C.product_id) FROM Products P LEFT JOIN Contents C ON P.id = C.product_id LEFT JOIN Packets D ON D.id = C.packet_id GROUP BY P.id;
-90. SELECT P.id, P.name, MAX(R.score) FROM Players P , Results R WHERE P.id = R.player_id GROUP BY P.id ORDER BY P.name;
+89. SELECT D.name, COALESCE(MAX(DISTINCT C.product_id),0) FROM Products D LEFT JOIN Contents C ON D.id = C.product_id LEFT JOIN Packets P ON D.id = C.packet_id GROUP BY D.id;
 92. SELECT U.name, COUNT(F.friend_id) FROM Users U LEFT JOIN Friends F ON U.id = F.user_id WHERE F.user_id IN(SELECT F.friend_id FROM Friends F) GROUP BY U.id;
-96. SELECT P.name, CASE WHEN P.id % 2 = 0 THEN 1 ELSE 2 END FROM Players P ORDER BY P.name;
+96. SELECT name, CASE WHEN id % 2 = 0 THEN 1 ELSE 2 END FROM Players ORDER BY name;
 97. SELECT P.name, CASE WHEN P.id % 2 = 0 THEN "Puput" ELSE "Kilit" END FROM Players P ORDER BY P.name;
-
+100.SELECT MAX((SELECT COUNT(*) FROM Reservations A WHERE A.start <= B.end AND A.end >= B.start)) FROM Reservations B;
